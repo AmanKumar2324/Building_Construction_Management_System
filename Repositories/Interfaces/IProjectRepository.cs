@@ -1,4 +1,5 @@
-﻿using Building_Construction_Management_System.Models;
+﻿using Building_Construction_Management_System.DTOs;
+using Building_Construction_Management_System.Models;
 
 namespace Building_Construction_Management_System.Repositories.Interfaces
 {
@@ -9,7 +10,7 @@ namespace Building_Construction_Management_System.Repositories.Interfaces
         Task<IEnumerable<Project>> GetProjectsAsync();
         Task UpdateProjectAsync(Project project);
         Task DeleteProjectAsync(int projectId);
-        Task<IEnumerable<object>> GetBudgetReportAsync();
-        Task<object> GetProjectProgressReportAsync(int projectId);
+        Task<IEnumerable<BudgetReportDTO>> GetBudgetReportAsync();
+        Task<IEnumerable<ProjectProgressDTO>> GetProjectProgressReportAsync(int projectId);
     }
 }
