@@ -1,5 +1,7 @@
 
 using Building_Construction_Management_System.Data;
+using Building_Construction_Management_System.Repositories.Implementations;
+using Building_Construction_Management_System.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 namespace Building_Construction_Management_System
 {
@@ -12,6 +14,7 @@ namespace Building_Construction_Management_System
             // Add services to the container.
             builder.Services.AddDbContext<BuildingConstructionDbContext>(options =>
                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
