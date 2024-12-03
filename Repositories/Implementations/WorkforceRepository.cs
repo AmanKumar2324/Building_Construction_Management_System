@@ -14,7 +14,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddWorkforceAsync(Workforce workforce)
+        public async System.Threading.Tasks.Task AddWorkforceAsync(Workforce workforce)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddWorkforce @ProjectId={workforce.ProjectId}, @TaskId={workforce.TaskId}, @Role={workforce.Role}, @AttendanceStatus={workforce.AttendanceStatus}, @PerformanceRating={workforce.PerformanceRating}");
@@ -26,7 +26,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
                 .FromSqlInterpolated($"EXEC GetWorkforceByProjectId @ProjectId={projectId}")
                 .ToListAsync();
         }
-        public async Task UpdateWorkforceAsync(int workerId, string role, string attendanceStatus, decimal performanceRating)
+        public async System.Threading.Tasks.Task UpdateWorkforceAsync(int workerId, string role, string attendanceStatus, decimal performanceRating)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC UpdateWorkforce @WorkerId={workerId}, @Role={role}, @AttendanceStatus={attendanceStatus}, @PerformanceRating={performanceRating}");

@@ -14,7 +14,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddFinanceAsync(Finance finance)
+        public async System.Threading.Tasks.Task AddFinanceAsync(Finance finance)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddFinance @ProjectId={finance.ProjectId}, @ExpenseType={finance.ExpenseType}, @Amount={finance.Amount}, @Date={finance.Date}, @PaymentStatus={finance.PaymentStatus}");

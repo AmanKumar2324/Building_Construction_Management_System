@@ -12,7 +12,7 @@ namespace Building_Construction_Management_System.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<Models.Task> Tasks { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
         public DbSet<SafetyInspection> SafetyInspections { get; set; }

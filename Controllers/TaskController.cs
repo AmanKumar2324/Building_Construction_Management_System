@@ -30,7 +30,7 @@ namespace Building_Construction_Management_System.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTask(Tasks task)
+        public async Task<IActionResult> AddTask(Models.Task task)
         {
             await _taskService.AddTaskAsync(task);
             return Created("", task);
@@ -38,7 +38,7 @@ namespace Building_Construction_Management_System.Controllers
 
         // GET: api/tasks/bypriority/{priority}
         [HttpGet("bypriority/{priority}")]
-        public async Task<ActionResult<IEnumerable<Tasks>>> GetTasksByPriorityAsync(string priority)
+        public async Task<ActionResult<IEnumerable<Models.Task>>> GetTasksByPriorityAsync(string priority)
         {
             if (string.IsNullOrWhiteSpace(priority))
             {

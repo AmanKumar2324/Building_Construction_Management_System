@@ -21,7 +21,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             return await _documentRepository.GetDocumentsByProjectIdAsync(projectId);
         }
 
-        public async Task AddDocumentAsync(Document document)
+        public async System.Threading.Tasks.Task AddDocumentAsync(Document document)
         {
             if (string.IsNullOrWhiteSpace(document.DocumentType))
             {

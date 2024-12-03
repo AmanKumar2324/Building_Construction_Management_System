@@ -14,7 +14,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddVendorAsync(Vendor vendor)
+        public async System.Threading.Tasks.Task AddVendorAsync(Vendor vendor)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddVendor @Name={vendor.Name}, @ContactDetails={vendor.ContactDetails}, @MaterialSupplied={vendor.MaterialSupplied}, @ContractTerms={vendor.ContractTerms}, @DeliveryStatus={vendor.DeliveryStatus}");
@@ -27,13 +27,13 @@ namespace Building_Construction_Management_System.Repositories.Implementations
                 .ToListAsync();
         }
 
-        public async Task RemoveVendorAsync(int vendorId)
+        public async System.Threading.Tasks.Task RemoveVendorAsync(int vendorId)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC RemoveVendors @VendorId={vendorId}");
         }
 
-        public async Task UpdateVendorStatusAsync(int vendorId, string status)
+        public async System.Threading.Tasks.Task UpdateVendorStatusAsync(int vendorId, string status)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC UpdateVendorStatus @VendorId={vendorId}, @Status={status}");

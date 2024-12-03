@@ -21,7 +21,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             return await _reportRepository.GetReportsByProjectIdAsync(projectId);
         }
 
-        public async Task AddReportAsync(Report report)
+        public async System.Threading.Tasks.Task AddReportAsync(Report report)
         {
             if (string.IsNullOrWhiteSpace(report.ReportType))
             {

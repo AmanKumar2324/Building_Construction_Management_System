@@ -14,7 +14,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddSafetyInspectionAsync(SafetyInspection inspection)
+        public async System.Threading.Tasks.Task AddSafetyInspectionAsync(SafetyInspection inspection)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddSafetyInspection @ProjectId={inspection.ProjectId}, @SupervisorId={inspection.SupervisorId}, @InspectionDate={inspection.InspectionDate}, @Findings={inspection.Findings}, @CorrectiveAction={inspection.CorrectiveAction}");

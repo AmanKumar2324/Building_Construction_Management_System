@@ -14,7 +14,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddUserAsync(User user)
+        public async System.Threading.Tasks.Task AddUserAsync(User user)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddUser @Username={user.Username}, @PasswordHash={user.PasswordHash}, @Role={user.Role}, @Email={user.Email}, @PhoneNumber={user.PhoneNumber}, @IsActive={user.IsActive}");
@@ -30,7 +30,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             return await _context.Users.ToListAsync();
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async System.Threading.Tasks.Task UpdateUserAsync(User user)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC UpdateUser @UserId={user.UserId}, @Username={user.Username}, @Role={user.Role}, @Email={user.Email}, @PhoneNumber={user.PhoneNumber}, @IsActive={user.IsActive}");

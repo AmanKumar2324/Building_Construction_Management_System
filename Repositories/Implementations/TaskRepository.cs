@@ -14,22 +14,22 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddTaskAsync(Tasks task)
+        public async System.Threading.Tasks.Task AddTaskAsync(Models.Task task)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddTask @ProjectId={task.ProjectId}, @TaskName={task.TaskName}, @AssignedTo={task.AssignedTo}, @StartDate={task.StartDate}, @EndDate={task.EndDate}, @Priority={task.Priority}, @Status={task.Status}");
         }
 
-        public async Task<IEnumerable<Tasks>> GetTasksByProjectIdAsync(int projectId)
+        public async Task<IEnumerable<Models.Task>> GetTasksByProjectIdAsync(int projectId)
         {
             return await _context.Tasks.FromSqlInterpolated($"EXEC GetTasksByProject @ProjectId={projectId}").ToListAsync();
         }
 
-        public async Task<IEnumerable<Tasks>> GetDelayedTasksAsync()
+        public async Task<IEnumerable<Models.Task>> GetDelayedTasksAsync()
         {
             return await _context.Tasks.FromSqlInterpolated($"EXEC GetDelayedTasks").ToListAsync();
         }
-        public async Task<IEnumerable<Tasks>> GetTasksByPriorityAsync(string priority)
+        public async Task<IEnumerable<Models.Task>> GetTasksByPriorityAsync(string priority)
         {
             return await _context.Tasks
                 .FromSqlInterpolated($"EXEC GetTasksByPriority @Priority={priority}")

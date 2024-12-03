@@ -21,7 +21,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             return await _vendorRepository.GetVendorsAsync();
         }
 
-        public async Task AddVendorAsync(Vendor vendor)
+        public async System.Threading.Tasks.Task AddVendorAsync(Vendor vendor)
         {
             if (string.IsNullOrWhiteSpace(vendor.Name))
             {
@@ -32,7 +32,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task RemoveVendorAsync(int vendorId)
+        public async System.Threading.Tasks.Task RemoveVendorAsync(int vendorId)
         {
             if (vendorId <= 0)
             {
@@ -43,7 +43,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateVendorStatusAsync(int vendorId, string status)
+        public async System.Threading.Tasks.Task UpdateVendorStatusAsync(int vendorId, string status)
         {
             if (string.IsNullOrWhiteSpace(status))
             {

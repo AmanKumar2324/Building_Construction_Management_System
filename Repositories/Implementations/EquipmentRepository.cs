@@ -14,7 +14,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddEquipmentAsync(Equipment equipment)
+        public async System.Threading.Tasks.Task AddEquipmentAsync(Equipment equipment)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddEquipment @ProjectId={equipment.ProjectId}, @EquipmentName={equipment.EquipmentName}, @Condition={equipment.Condition}, @MaintenanceSchedule={equipment.MaintenanceSchedule}, @UsageLogs={equipment.UsageLogs}");
@@ -27,7 +27,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
                 .ToListAsync();
         }
 
-        public async Task UpdateEquipmentConditionAsync(int equipmentId, string condition)
+        public async System.Threading.Tasks.Task UpdateEquipmentConditionAsync(int equipmentId, string condition)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC UpdateEquipmentCondition @EquipmentId={equipmentId}, @Condition={condition}");

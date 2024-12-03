@@ -16,17 +16,17 @@ namespace Building_Construction_Management_System.Services.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Tasks>> GetTasksByProjectIdAsync(int projectId)
+        public async Task<IEnumerable<Models.Task>> GetTasksByProjectIdAsync(int projectId)
         {
             return await _taskRepository.GetTasksByProjectIdAsync(projectId);
         }
 
-        public async Task<IEnumerable<Tasks>> GetDelayedTasksAsync()
+        public async Task<IEnumerable<Models.Task>> GetDelayedTasksAsync()
         {
             return await _taskRepository.GetDelayedTasksAsync();
         }
 
-        public async Task AddTaskAsync(Tasks task)
+        public async System.Threading.Tasks.Task AddTaskAsync(Models.Task task)
         {
             if (string.IsNullOrWhiteSpace(task.TaskName))
             {
@@ -36,7 +36,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _taskRepository.AddTaskAsync(task);
             await _unitOfWork.SaveChangesAsync();
         }
-        public async Task<IEnumerable<Tasks>> GetTasksByPriorityAsync(string priority)
+        public async Task<IEnumerable<Models.Task>> GetTasksByPriorityAsync(string priority)
         {
             if (string.IsNullOrWhiteSpace(priority))
             {

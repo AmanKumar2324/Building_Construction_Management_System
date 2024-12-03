@@ -21,7 +21,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             return await _workforceRepository.GetWorkforceByProjectIdAsync(projectId);
         }
 
-        public async Task AddWorkforceAsync(Workforce workforce)
+        public async System.Threading.Tasks.Task AddWorkforceAsync(Workforce workforce)
         {
             if (string.IsNullOrWhiteSpace(workforce.Role))
             {
@@ -31,7 +31,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _workforceRepository.AddWorkforceAsync(workforce);
             await _unitOfWork.SaveChangesAsync();
         }
-        public async Task UpdateWorkforceAsync(int workerId, string role, string attendanceStatus, decimal performanceRating)
+        public async System.Threading.Tasks.Task UpdateWorkforceAsync(int workerId, string role, string attendanceStatus, decimal performanceRating)
         {
             // Input validation (optional)
             if (string.IsNullOrWhiteSpace(role))

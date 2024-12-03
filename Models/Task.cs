@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Building_Construction_Management_System.Models
 {
-    public class Tasks
+    [Table("Tasks")]
+    public class Task
     {
         [Key]
         public int TaskId { get; set; }

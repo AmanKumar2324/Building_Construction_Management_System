@@ -14,13 +14,13 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddMaterialAsync(Material material)
+        public async System.Threading.Tasks.Task AddMaterialAsync(Material material)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddMaterial @ProjectId={material.ProjectId}, @MaterialName={material.MaterialName}, @Quantity={material.Quantity}, @SupplierId={material.SupplierId}, @Cost={material.Cost}, @Status={material.Status}");
         }
 
-        public async Task UpdateMaterialStatusAsync(int materialId, string status)
+        public async System.Threading.Tasks.Task UpdateMaterialStatusAsync(int materialId, string status)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC UpdateMaterialStatus @MaterialId={materialId}, @Status={status}");

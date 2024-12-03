@@ -4,7 +4,7 @@ namespace Building_Construction_Management_System.Repositories.Interfaces
 {
     public interface IReportRepository
     {
-        Task AddReportAsync(Report report);
+        System.Threading.Tasks.Task AddReportAsync(Report report);
         Task<IEnumerable<Report>> GetReportsByProjectIdAsync(int projectId);
     }
 }

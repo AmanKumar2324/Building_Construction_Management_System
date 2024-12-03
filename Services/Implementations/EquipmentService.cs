@@ -21,7 +21,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             return await _equipmentRepository.GetEquipmentByProjectIdAsync(projectId);
         }
 
-        public async Task AddEquipmentAsync(Equipment equipment)
+        public async System.Threading.Tasks.Task AddEquipmentAsync(Equipment equipment)
         {
             if (string.IsNullOrWhiteSpace(equipment.EquipmentName))
             {
@@ -32,7 +32,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateEquipmentConditionAsync(int equipmentId, string condition)
+        public async System.Threading.Tasks.Task UpdateEquipmentConditionAsync(int equipmentId, string condition)
         {
             if (string.IsNullOrWhiteSpace(condition))
             {

@@ -4,9 +4,9 @@ namespace Building_Construction_Management_System.Repositories.Interfaces
 {
     public interface ITaskRepository
     {
-        Task AddTaskAsync(Tasks task);
-        Task<IEnumerable<Tasks>> GetTasksByProjectIdAsync(int projectId);
-        Task<IEnumerable<Tasks>> GetDelayedTasksAsync();
-        Task<IEnumerable<Tasks>> GetTasksByPriorityAsync(string priority);
+        System.Threading.Tasks.Task AddTaskAsync(Models.Task task);
+        Task<IEnumerable<Models.Task>> GetTasksByProjectIdAsync(int projectId);
+        Task<IEnumerable<Models.Task>> GetDelayedTasksAsync();
+        Task<IEnumerable<Models.Task>> GetTasksByPriorityAsync(string priority);
     }
 }

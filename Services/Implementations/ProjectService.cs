@@ -26,7 +26,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             return await _projectRepository.GetProjectByIdAsync(projectId);
         }
 
-        public async Task AddProjectAsync(Project project)
+        public async System.Threading.Tasks.Task AddProjectAsync(Project project)
         {
             if (string.IsNullOrWhiteSpace(project.Name) || project.Budget <= 0)
             {
@@ -37,7 +37,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateProjectAsync(Project project)
+        public async System.Threading.Tasks.Task UpdateProjectAsync(Project project)
         {
             if (project.ProjectId <= 0)
             {
@@ -48,7 +48,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task DeleteProjectAsync(int projectId)
+        public async System.Threading.Tasks.Task DeleteProjectAsync(int projectId)
         {
             if (projectId <= 0)
             {

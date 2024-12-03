@@ -25,7 +25,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             return await _userRepository.GetUserByIdAsync(userId);
         }
 
-        public async Task AddUserAsync(User user)
+        public async System.Threading.Tasks.Task AddUserAsync(User user)
         {
             if (string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.PasswordHash))
             {
@@ -36,7 +36,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async System.Threading.Tasks.Task UpdateUserAsync(User user)
         {
             if (user.UserId <= 0)
             {

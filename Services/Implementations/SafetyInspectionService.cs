@@ -16,7 +16,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public async Task AddSafetyInspectionAsync(SafetyInspection inspection)
+        public async System.Threading.Tasks.Task AddSafetyInspectionAsync(SafetyInspection inspection)
         {
             if (inspection.InspectionDate == default)
             {

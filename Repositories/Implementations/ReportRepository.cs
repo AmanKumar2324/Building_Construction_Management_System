@@ -14,7 +14,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddReportAsync(Report report)
+        public async System.Threading.Tasks.Task AddReportAsync(Report report)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddReport @ProjectId={report.ProjectId}, @ReportType={report.ReportType}, @GeneratedDate={report.GeneratedDate}, @Data={report.Data}, @CreatedBy={report.CreatedBy}");

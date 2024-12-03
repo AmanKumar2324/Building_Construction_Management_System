@@ -21,7 +21,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             return await _financeRepository.GetFinanceByProjectIdAsync(projectId);
         }
 
-        public async Task AddFinanceAsync(Finance finance)
+        public async System.Threading.Tasks.Task AddFinanceAsync(Finance finance)
         {
             if (finance.Amount <= 0)
             {

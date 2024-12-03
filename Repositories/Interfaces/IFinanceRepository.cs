@@ -4,7 +4,7 @@ namespace Building_Construction_Management_System.Repositories.Interfaces
 {
     public interface IFinanceRepository
     {
-        Task AddFinanceAsync(Finance finance);
+        System.Threading.Tasks.Task AddFinanceAsync(Finance finance);
         Task<IEnumerable<Finance>> GetFinanceByProjectIdAsync(int projectId);
     }
 }

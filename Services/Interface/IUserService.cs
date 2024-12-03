@@ -6,7 +6,7 @@ namespace Building_Construction_Management_System.Services.Interfaces
     {
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserByIdAsync(int userId);
-        Task AddUserAsync(User user);
-        Task UpdateUserAsync(User user);
+        System.Threading.Tasks.Task AddUserAsync(User user);
+        System.Threading.Tasks.Task UpdateUserAsync(User user);
     }
 }

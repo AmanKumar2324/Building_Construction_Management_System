@@ -5,11 +5,11 @@ namespace Building_Construction_Management_System.Repositories.Interfaces
 {
     public interface IProjectRepository
     {
-        Task AddProjectAsync(Project project);
+        System.Threading.Tasks.Task AddProjectAsync(Project project);
         Task<Project> GetProjectByIdAsync(int projectId);
         Task<IEnumerable<Project>> GetProjectsAsync();
-        Task UpdateProjectAsync(Project project);
-        Task DeleteProjectAsync(int projectId);
+        System.Threading.Tasks.Task UpdateProjectAsync(Project project);
+        System.Threading.Tasks.Task DeleteProjectAsync(int projectId);
         Task<IEnumerable<BudgetReportDTO>> GetBudgetReportAsync();
         Task<IEnumerable<ProjectProgressDTO>> GetProjectProgressReportAsync(int projectId);
     }

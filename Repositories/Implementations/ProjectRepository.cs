@@ -15,7 +15,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddProjectAsync(Project project)
+        public async System.Threading.Tasks.Task AddProjectAsync(Project project)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddProject @Name={project.Name}, @Location={project.Location}, @StartDate={project.StartDate}, @EndDate={project.EndDate}, @Budget={project.Budget}, @Status={project.Status}, @ProjectManagerId={project.ProjectManagerId}");
@@ -31,13 +31,13 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             return await _context.Projects.ToListAsync();
         }
 
-        public async Task UpdateProjectAsync(Project project)
+        public async System.Threading.Tasks.Task UpdateProjectAsync(Project project)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC UpdateProject @ProjectId={project.ProjectId}, @Name={project.Name}, @Location={project.Location}, @StartDate={project.StartDate}, @EndDate={project.EndDate}, @Budget={project.Budget}, @Status={project.Status}");
         }
 
-        public async Task DeleteProjectAsync(int projectId)
+        public async System.Threading.Tasks.Task DeleteProjectAsync(int projectId)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync($"EXEC DeleteProject @ProjectId={projectId}");
         }

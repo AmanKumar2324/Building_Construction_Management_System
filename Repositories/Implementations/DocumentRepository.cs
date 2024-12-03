@@ -14,7 +14,7 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
-        public async Task AddDocumentAsync(Document document)
+        public async System.Threading.Tasks.Task AddDocumentAsync(Document document)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddDocument @ProjectId={document.ProjectId}, @DocumentType={document.DocumentType}, @UploadedBy={document.UploadedBy}, @UploadDate={document.UploadDate}, @VersionNumber={document.VersionNumber}");

@@ -20,7 +20,7 @@ namespace Building_Construction_Management_System.Services.Implementations
         //    return await _materialRepository.GetMaterialsByProjectIdAsync(projectId);
         //}
 
-        public async Task AddMaterialAsync(Material material)
+        public async System.Threading.Tasks.Task AddMaterialAsync(Material material)
         {
             if (string.IsNullOrWhiteSpace(material.MaterialName))
             {
@@ -31,7 +31,7 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateMaterialStatusAsync(int materialId, string status)
+        public async System.Threading.Tasks.Task UpdateMaterialStatusAsync(int materialId, string status)
         {
             if (string.IsNullOrWhiteSpace(status))
             {
