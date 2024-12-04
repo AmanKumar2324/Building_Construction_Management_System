@@ -1,12 +1,18 @@
 
 using Building_Construction_Management_System.Data;
+using Building_Construction_Management_System.Helpers;
 using Building_Construction_Management_System.Repositories.Implementations;
 using Building_Construction_Management_System.Repositories.Interfaces;
 using Building_Construction_Management_System.Services.Implementations;
 using Building_Construction_Management_System.Services.Interface;
 using Building_Construction_Management_System.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 namespace Building_Construction_Management_System
+
 {
     public class Program
     {
@@ -14,7 +20,7 @@ namespace Building_Construction_Management_System
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+           
             builder.Services.AddDbContext<BuildingConstructionDbContext>(options =>
                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -45,6 +51,29 @@ namespace Building_Construction_Management_System
             builder.Services.AddScoped<IReportService, ReportService>();
             builder.Services.AddScoped<IDocumentService, DocumentService>();
 
+            // Add services to the container.
+            builder.Services.AddScoped<JwtTokenHelper>();
+            // Add JWT authentication
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSettings["Issuer"],
+                    ValidAudience = jwtSettings["Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+                };
+            });
+            builder.Services.AddAuthorization();
             // Add controllers
             builder.Services.AddControllers();
 

@@ -77,5 +77,11 @@ namespace Building_Construction_Management_System.Repositories.Implementations
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.RoleUserId == roleUserId);
         }
+        public async Task<User> AuthenticateUserAsync(string roleUserId, string password)
+        {
+            return await _context.Users
+                .FirstOrDefaultAsync(u => u.RoleUserId == roleUserId && u.PasswordHash == password);
+        }
+
     }
 }

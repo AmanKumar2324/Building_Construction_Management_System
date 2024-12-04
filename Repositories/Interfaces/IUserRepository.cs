@@ -11,5 +11,8 @@ namespace Building_Construction_Management_System.Repositories.Interfaces
         System.Threading.Tasks.Task UpdateUserAsync(User user);
         System.Threading.Tasks.Task DeleteUserAsync(int userId);
         Task<User> GetUserByRoleUserIdAsync(string roleUserId);
+        Task<User> AuthenticateUserAsync(string roleUserId, string password);
+        
+
     }
 }
