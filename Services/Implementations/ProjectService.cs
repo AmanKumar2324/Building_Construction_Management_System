@@ -9,11 +9,13 @@ namespace Building_Construction_Management_System.Services.Implementations
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserRepository _userRepository;
 
-        public ProjectService(IProjectRepository projectRepository, IUnitOfWork unitOfWork)
+        public ProjectService(IProjectRepository projectRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             _projectRepository = projectRepository;
             _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<Project>> GetProjectsAsync()
@@ -26,16 +28,30 @@ namespace Building_Construction_Management_System.Services.Implementations
             return await _projectRepository.GetProjectByIdAsync(projectId);
         }
 
+        //public async System.Threading.Tasks.Task AddProjectAsync(Project project)
+        //{
+        //    if (string.IsNullOrWhiteSpace(project.Name) || project.Budget <= 0)
+        //    {
+        //        throw new ArgumentException("Project name and budget are required.");
+        //    }
+
+        //    await _projectRepository.AddProjectAsync(project);
+        //    await _unitOfWork.SaveChangesAsync();
+        //}
         public async System.Threading.Tasks.Task AddProjectAsync(Project project)
         {
-            if (string.IsNullOrWhiteSpace(project.Name) || project.Budget <= 0)
+            // Validate Project Manager ID
+            var manager = await _userRepository.GetUserByRoleUserIdAsync(project.ProjectManagerId);
+            if (manager == null)
             {
-                throw new ArgumentException("Project name and budget are required.");
+                throw new ArgumentException("Invalid Project Manager ID.");
             }
 
+            // Add Project
             await _projectRepository.AddProjectAsync(project);
             await _unitOfWork.SaveChangesAsync();
         }
+
 
         public async System.Threading.Tasks.Task UpdateProjectAsync(Project project)
         {
@@ -44,9 +60,17 @@ namespace Building_Construction_Management_System.Services.Implementations
                 throw new ArgumentException("Invalid project ID.");
             }
 
+            // Ensure the ProjectManagerId is valid
+            var manager = await _userRepository.GetUserByRoleUserIdAsync(project.ProjectManagerId);
+            if (manager == null)
+            {
+                throw new ArgumentException("Invalid Project Manager ID.");
+            }
+
             await _projectRepository.UpdateProjectAsync(project);
             await _unitOfWork.SaveChangesAsync();
         }
+
 
         public async System.Threading.Tasks.Task DeleteProjectAsync(int projectId)
         {

@@ -30,13 +30,13 @@ namespace Building_Construction_Management_System.Repositories.Implementations
         public async System.Threading.Tasks.Task RemoveVendorAsync(int vendorId)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
-                $"EXEC RemoveVendors @VendorId={vendorId}");
+                $"EXEC RemoveVendor @VendorId={vendorId}");
         }
 
-        public async System.Threading.Tasks.Task UpdateVendorStatusAsync(int vendorId, string status)
+        public async System.Threading.Tasks.Task UpdateVendorStatusAsync(int vendorId, string deliveryStatus)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
-                $"EXEC UpdateVendorStatus @VendorId={vendorId}, @Status={status}");
+                $"EXEC UpdateVendorStatus @VendorId={vendorId}, @DeliveryStatus={deliveryStatus}");
         }
     }
 }

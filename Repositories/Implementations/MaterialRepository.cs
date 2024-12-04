@@ -26,11 +26,11 @@ namespace Building_Construction_Management_System.Repositories.Implementations
                 $"EXEC UpdateMaterialStatus @MaterialId={materialId}, @Status={status}");
         }
 
-        //public async Task<IEnumerable<Material>> GetMaterialsByProjectIdAsync(int projectId)
-        //{
-        //    return await _context.Materials
-        //        .FromSqlInterpolated($"EXEC GetMaterialsByProjectId @ProjectId={projectId}")
-        //        .ToListAsync();
-        //}
+        public async Task<IEnumerable<Material>> GetMaterialsByProjectIdAsync(int projectId)
+        {
+            return await _context.Materials
+                .FromSqlInterpolated($"EXEC GetMaterialsByProjectId @ProjectId={projectId}")
+                .ToListAsync();
+        }
     }
 }

@@ -8,6 +8,10 @@ namespace Building_Construction_Management_System.Models
         public int UserId { get; set; }
 
         [Required]
+        [MaxLength(50)]
+        public string RoleUserId { get; set; }
+
+        [Required]
         [MaxLength(100)]
         public string Username { get; set; }
 

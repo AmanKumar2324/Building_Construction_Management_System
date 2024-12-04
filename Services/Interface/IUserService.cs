@@ -8,5 +8,6 @@ namespace Building_Construction_Management_System.Services.Interfaces
         Task<User> GetUserByIdAsync(int userId);
         System.Threading.Tasks.Task AddUserAsync(User user);
         System.Threading.Tasks.Task UpdateUserAsync(User user);
+        System.Threading.Tasks.Task DeleteUserAsync(int userId);
     }
 }

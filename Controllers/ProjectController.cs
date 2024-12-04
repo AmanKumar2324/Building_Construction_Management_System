@@ -31,20 +31,61 @@ namespace Building_Construction_Management_System.Controllers
             return Ok(project);
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> AddProject(Project project)
+        //{
+        //    await _projectService.AddProjectAsync(project);
+        //    return CreatedAtAction(nameof(GetProjectById), new { id = project.ProjectId }, project);
+        //}
         [HttpPost]
-        public async Task<IActionResult> AddProject(Project project)
+        public async Task<IActionResult> AddProject([FromBody] Project project)
         {
-            await _projectService.AddProjectAsync(project);
-            return CreatedAtAction(nameof(GetProjectById), new { id = project.ProjectId }, project);
+            try
+            {
+                await _projectService.AddProjectAsync(project);
+                return CreatedAtAction(nameof(GetProjectById), new { id = project.ProjectId }, project);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while adding the project.", Details = ex.Message });
+            }
         }
 
+
+        //[HttpPut("{id:int}")]
+        //public async Task<IActionResult> UpdateProject(int id, Project project)
+        //{
+        //    if (id != project.ProjectId) return BadRequest();
+        //    await _projectService.UpdateProjectAsync(project);
+        //    return NoContent();
+        //}
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateProject(int id, Project project)
+        public async Task<IActionResult> UpdateProject(int id, [FromBody] Project project)
         {
-            if (id != project.ProjectId) return BadRequest();
-            await _projectService.UpdateProjectAsync(project);
-            return NoContent();
+            if (id != project.ProjectId)
+            {
+                return BadRequest(new { Message = "Project ID in the URL does not match the body." });
+            }
+
+            try
+            {
+                await _projectService.UpdateProjectAsync(project);
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while updating the project.", Details = ex.Message });
+            }
         }
+
 
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteProject(int id)

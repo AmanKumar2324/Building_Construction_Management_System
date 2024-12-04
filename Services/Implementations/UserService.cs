@@ -46,5 +46,15 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _userRepository.UpdateUserAsync(user);
             await _unitOfWork.SaveChangesAsync();
         }
+        public async System.Threading.Tasks.Task DeleteUserAsync(int userId)
+        {
+            if (userId <= 0)
+            {
+                throw new ArgumentException("Invalid user ID.");
+            }
+
+            await _userRepository.DeleteUserAsync(userId);  // Call to repository to delete user
+            await _unitOfWork.SaveChangesAsync();  // Save changes after deletion
+        }
     }
 }

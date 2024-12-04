@@ -44,5 +44,19 @@ namespace Building_Construction_Management_System.Controllers
             await _userService.UpdateUserAsync(user);
             return NoContent();
         }
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            try
+            {
+                await _userService.DeleteUserAsync(id); // Call to the service to delete the user
+                return NoContent(); // Return status 204 (No Content) on successful deletion
+            }
+            catch (ArgumentException ex)
+            {
+                // Handle invalid or missing user ID
+                return BadRequest(ex.Message); // Return a bad request if the user ID is invalid
+            }
+        }
     }
 }

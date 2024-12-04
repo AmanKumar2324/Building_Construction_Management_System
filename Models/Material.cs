@@ -12,7 +12,7 @@ namespace Building_Construction_Management_System.Models
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
 
-        public Project Project { get; set; }
+        //public Project Project { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -24,7 +24,7 @@ namespace Building_Construction_Management_System.Models
         [ForeignKey("Vendor")]
         public int? SupplierId { get; set; }
 
-        public Vendor Supplier { get; set; }
+        //public Vendor Supplier { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18, 2)")]

@@ -28,8 +28,9 @@ namespace Building_Construction_Management_System.Models
 
         [Required]
         [ForeignKey("User")]
-        public int ProjectManagerId { get; set; }
+        [MaxLength(50)]
+        public string ProjectManagerId { get; set; }
 
-        public User ProjectManager { get; set; }
+        //public User ProjectManager { get; set; }
     }
 }

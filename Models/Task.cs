@@ -13,16 +13,16 @@ namespace Building_Construction_Management_System.Models
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
 
-        public Project Project { get; set; }
+        //public Project Project { get; set; }
 
         [Required]
         [MaxLength(255)]
         public string TaskName { get; set; }
 
         [ForeignKey("User")]
-        public int? AssignedTo { get; set; }
+        public string? AssignedTo { get; set; }
 
-        public User AssignedUser { get; set; }
+        //public User AssignedUser { get; set; }
 
         public DateTime? StartDate { get; set; }
 

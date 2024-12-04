@@ -15,11 +15,25 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
+        //public async System.Threading.Tasks.Task AddProjectAsync(Project project)
+        //{
+        //    await _context.Database.ExecuteSqlInterpolatedAsync(
+        //        $"EXEC AddProject @Name={project.Name}, @Location={project.Location}, @StartDate={project.StartDate}, @EndDate={project.EndDate}, @Budget={project.Budget}, @Status={project.Status}, @ProjectManagerId={project.ProjectManagerId}");
+        //}
         public async System.Threading.Tasks.Task AddProjectAsync(Project project)
         {
+            // Validate Project Manager
+            var managerExists = await _context.Users.AnyAsync(u => u.RoleUserId == project.ProjectManagerId && u.Role == "Project Manager");
+            if (!managerExists)
+            {
+                throw new ArgumentException("Project Manager not found. Please add the Project Manager first.");
+            }
+
+            // Add Project
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC AddProject @Name={project.Name}, @Location={project.Location}, @StartDate={project.StartDate}, @EndDate={project.EndDate}, @Budget={project.Budget}, @Status={project.Status}, @ProjectManagerId={project.ProjectManagerId}");
         }
+
 
         public async Task<Project> GetProjectByIdAsync(int projectId)
         {
@@ -34,8 +48,9 @@ namespace Building_Construction_Management_System.Repositories.Implementations
         public async System.Threading.Tasks.Task UpdateProjectAsync(Project project)
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
-                $"EXEC UpdateProject @ProjectId={project.ProjectId}, @Name={project.Name}, @Location={project.Location}, @StartDate={project.StartDate}, @EndDate={project.EndDate}, @Budget={project.Budget}, @Status={project.Status}");
+                $"EXEC UpdateProject @ProjectId={project.ProjectId}, @Name={project.Name}, @Location={project.Location}, @StartDate={project.StartDate}, @EndDate={project.EndDate}, @Budget={project.Budget}, @Status={project.Status}, @ProjectManagerId={project.ProjectManagerId}");
         }
+
 
         public async System.Threading.Tasks.Task DeleteProjectAsync(int projectId)
         {

@@ -14,11 +14,44 @@ namespace Building_Construction_Management_System.Repositories.Implementations
             _context = context;
         }
 
+        //public async System.Threading.Tasks.Task AddUserAsync(User user)
+        //{
+        //    await _context.Database.ExecuteSqlInterpolatedAsync(
+        //        $"EXEC AddUser @Username={user.Username}, @PasswordHash={user.PasswordHash}, @Role={user.Role}, @Email={user.Email}, @PhoneNumber={user.PhoneNumber}, @IsActive={user.IsActive}");
+        //}
+
         public async System.Threading.Tasks.Task AddUserAsync(User user)
         {
-            await _context.Database.ExecuteSqlInterpolatedAsync(
-                $"EXEC AddUser @Username={user.Username}, @PasswordHash={user.PasswordHash}, @Role={user.Role}, @Email={user.Email}, @PhoneNumber={user.PhoneNumber}, @IsActive={user.IsActive}");
+            // Generate Custom User ID
+            user.RoleUserId = await GenerateCustomUserIdAsync(user.Role);
+
+            // Add User to Database
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
         }
+
+        private async Task<string> GenerateCustomUserIdAsync(string role)
+        {
+            // Determine Prefix Based on Role
+            string prefix = role switch
+            {
+                "Admin" => "ADMIN",
+                "Project Manager" => "PM",
+                "Architect" => "ARCH",
+                "Engineer" => "ENG",
+                "Site Supervisor" => "SS",
+                "Worker" => "W",
+                "Supplier" => "SUP",
+                _ => throw new ArgumentException("Invalid role")
+            };
+
+            // Count Existing Users with the Same Role Prefix
+            int count = await _context.Users.CountAsync(u => u.RoleUserId.StartsWith(prefix));
+
+            // Generate Custom ID (e.g., PM001, ADMIN002)
+            return $"{prefix}{(count + 1):D3}";
+        }
+
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
@@ -34,6 +67,15 @@ namespace Building_Construction_Management_System.Repositories.Implementations
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $"EXEC UpdateUser @UserId={user.UserId}, @Username={user.Username}, @Role={user.Role}, @Email={user.Email}, @PhoneNumber={user.PhoneNumber}, @IsActive={user.IsActive}");
+        }
+        public async System.Threading.Tasks.Task DeleteUserAsync(int userId)
+        {
+            // Using the stored procedure for deleting the user
+            await _context.Database.ExecuteSqlInterpolatedAsync($"EXEC DeleteUser @UserId={userId}");
+        }
+        public async Task<User> GetUserByRoleUserIdAsync(string roleUserId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.RoleUserId == roleUserId);
         }
     }
 }
