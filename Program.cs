@@ -81,6 +81,13 @@ namespace Building_Construction_Management_System
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(ops =>
+            {
+                ops.AddPolicy("localcors", p =>
+                {
+                    p.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+                });
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -89,6 +96,8 @@ namespace Building_Construction_Management_System
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors("localcors");
 
             app.UseHttpsRedirection();
 

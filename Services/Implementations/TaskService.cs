@@ -45,5 +45,28 @@ namespace Building_Construction_Management_System.Services.Implementations
 
             return await _taskRepository.GetTasksByPriorityAsync(priority);
         }
+        public async Task<IEnumerable<Models.Task>> GetTasksByRoleUserIdAsync(string roleUserId)
+        {
+            if (string.IsNullOrWhiteSpace(roleUserId))
+            {
+                throw new ArgumentException("RoleUserId cannot be null or empty.");
+            }
+
+            return await _taskRepository.GetTasksByRoleUserIdAsync(roleUserId);
+        }
+
+        public async System.Threading.Tasks.Task UpdateTaskStatusAsync(int taskId, string status)
+        {
+            if (string.IsNullOrWhiteSpace(status))
+            {
+                throw new ArgumentException("Status cannot be null or empty.");
+            }
+
+            // Optionally, you can add more validation logic based on business requirements.
+
+            await _taskRepository.UpdateTaskStatusAsync(taskId, status);
+        }
+
+
     }
 }

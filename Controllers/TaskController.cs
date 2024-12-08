@@ -61,5 +61,53 @@ namespace Building_Construction_Management_System.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpGet("assigned-to/{roleUserId}")]
+        public async Task<IActionResult> GetTasksByRoleUserId(string roleUserId)
+        {
+            try
+            {
+                var tasks = await _taskService.GetTasksByRoleUserIdAsync(roleUserId);
+
+                if (!tasks.Any())
+                {
+                    return NotFound(new { Message = "No tasks found for the given RoleUserId." });
+                }
+
+                return Ok(tasks);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching tasks.", Details = ex.Message });
+            }
+        }
+        // PUT api/Task/{taskId}/status
+        [HttpPatch("{taskId:int}/status")]
+        public async Task<IActionResult> UpdateTaskStatus(int taskId, [FromBody] string status)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(status))
+                {
+                    return BadRequest(new { Message = "Status cannot be empty." });
+                }
+
+                // Update task status
+                await _taskService.UpdateTaskStatusAsync(taskId, status);
+
+                return NoContent(); // Successfully updated
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while updating the task.", Details = ex.Message });
+            }
+        }
     }
 }

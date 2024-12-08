@@ -12,7 +12,7 @@ namespace Building_Construction_Management_System.Models
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
 
-        public Project Project { get; set; }
+        //public Project Project { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -28,6 +28,6 @@ namespace Building_Construction_Management_System.Models
         [ForeignKey("User")]
         public int CreatedBy { get; set; }
 
-        public User Creator { get; set; }
+        //public User Creator { get; set; }
     }
 }

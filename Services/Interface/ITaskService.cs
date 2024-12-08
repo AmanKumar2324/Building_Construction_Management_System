@@ -8,5 +8,7 @@ namespace Building_Construction_Management_System.Services.Interfaces
         Task<IEnumerable<Models.Task>> GetDelayedTasksAsync();
         System.Threading.Tasks.Task AddTaskAsync(Models.Task task);
         Task<IEnumerable<Models.Task>> GetTasksByPriorityAsync(string priority);
+        Task<IEnumerable<Models.Task>> GetTasksByRoleUserIdAsync(string roleUserId);
+        System.Threading.Tasks.Task UpdateTaskStatusAsync(int taskId, string status);
     }
 }
