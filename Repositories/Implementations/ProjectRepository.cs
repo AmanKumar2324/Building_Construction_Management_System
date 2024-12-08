@@ -1,4 +1,5 @@
 ﻿using Building_Construction_Management_System.Data;
+using Building_Construction_Management_System.Dtos;
 using Building_Construction_Management_System.DTOs;
 using Building_Construction_Management_System.Models;
 using Building_Construction_Management_System.Repositories.Interfaces;
@@ -70,5 +71,16 @@ namespace Building_Construction_Management_System.Repositories.Implementations
                 .FromSqlInterpolated($"EXEC GetProjectProgressReport @ProjectId={projectId}")
                 .ToListAsync();
         }
+        public async Task<IEnumerable<ProjectStatusDto>> GetProjectStatusesAsync()
+        {
+            return await _context.Projects
+                .Select(p => new ProjectStatusDto
+                {
+                    ProjectId = p.ProjectId,
+                    Status = p.Status
+                })
+                .ToListAsync();
+        }
+
     }
 }

@@ -107,5 +107,19 @@ namespace Building_Construction_Management_System.Controllers
             var report = await _projectService.GetProjectProgressReportAsync(id);
             return Ok(report);
         }
+
+        [HttpGet("statuses")]
+        public async Task<IActionResult> GetProjectStatuses()
+        {
+            try
+            {
+                var projectStatuses = await _projectService.GetProjectStatusesAsync();
+                return Ok(projectStatuses); // Return 200 OK with the project statuses
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching project statuses.", Details = ex.Message });
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Building_Construction_Management_System.Models;
 using Building_Construction_Management_System.DTOs;
+using Building_Construction_Management_System.Dtos;
 
 namespace Building_Construction_Management_System.Services.Interfaces
 {
@@ -12,5 +13,6 @@ namespace Building_Construction_Management_System.Services.Interfaces
         System.Threading.Tasks.Task DeleteProjectAsync(int projectId);
         Task<IEnumerable<BudgetReportDTO>> GetBudgetReportAsync();
         Task<IEnumerable<ProjectProgressDTO>> GetProjectProgressReportAsync(int projectId);
+        Task<IEnumerable<ProjectStatusDto>> GetProjectStatusesAsync();
     }
 }

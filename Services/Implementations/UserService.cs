@@ -56,5 +56,19 @@ namespace Building_Construction_Management_System.Services.Implementations
             await _userRepository.DeleteUserAsync(userId);  // Call to repository to delete user
             await _unitOfWork.SaveChangesAsync();  // Save changes after deletion
         }
+        public async Task<IEnumerable<User>> GetUsersByRoleAsync(string role)
+        {
+            return await _userRepository.GetUsersByRoleAsync(role);
+        }
+
+        public async Task<IEnumerable<User>> GetUsersByAvailabilityAsync(bool isActive)
+        {
+            return await _userRepository.GetUsersByAvailabilityAsync(isActive);
+        }
+
+        public async Task<IEnumerable<User>> GetUsersByRoleAndAvailabilityAsync(string role, bool isActive)
+        {
+            return await _userRepository.GetUsersByRoleAndAvailabilityAsync(role, isActive);
+        }
     }
 }

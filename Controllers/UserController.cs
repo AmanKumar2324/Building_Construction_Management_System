@@ -58,5 +58,47 @@ namespace Building_Construction_Management_System.Controllers
                 return BadRequest(ex.Message); // Return a bad request if the user ID is invalid
             }
         }
+
+        // GET /api/users/filter?role=Admin&isActive=true - Filter users by role and availability
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetFilteredUsers([FromQuery] string role, [FromQuery] bool? isActive)
+        {
+            try
+            {
+                IEnumerable<User> users;
+
+                if (!string.IsNullOrEmpty(role) && isActive.HasValue)
+                {
+                    // Filter by both role and availability
+                    users = await _userService.GetUsersByRoleAndAvailabilityAsync(role, isActive.Value);
+                }
+                else if (!string.IsNullOrEmpty(role))
+                {
+                    // Filter by role
+                    users = await _userService.GetUsersByRoleAsync(role);
+                }
+                else if (isActive.HasValue)
+                {
+                    // Filter by availability
+                    users = await _userService.GetUsersByAvailabilityAsync(isActive.Value);
+                }
+                else
+                {
+                    // If no filters are applied, return all users
+                    users = await _userService.GetUsersByRoleAsync("Admin"); // Optional default behavior
+                }
+
+                if (users == null || !users.Any())
+                {
+                    return NotFound(new { Message = "No users found matching the criteria." });
+                }
+
+                return Ok(users); // Return filtered users
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching users.", Details = ex.Message });
+            }
+        }
     }
 }

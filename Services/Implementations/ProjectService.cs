@@ -2,6 +2,7 @@
 using Building_Construction_Management_System.DTOs;
 using Building_Construction_Management_System.Repositories.Interfaces;
 using Building_Construction_Management_System.Services.Interfaces;
+using Building_Construction_Management_System.Dtos;
 
 namespace Building_Construction_Management_System.Services.Implementations
 {
@@ -92,5 +93,10 @@ namespace Building_Construction_Management_System.Services.Implementations
         {
             return await _projectRepository.GetProjectProgressReportAsync(projectId);
         }
+        public async Task<IEnumerable<ProjectStatusDto>> GetProjectStatusesAsync()
+        {
+            return await _projectRepository.GetProjectStatusesAsync();
+        }
+
     }
 }

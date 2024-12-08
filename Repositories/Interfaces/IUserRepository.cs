@@ -12,7 +12,10 @@ namespace Building_Construction_Management_System.Repositories.Interfaces
         System.Threading.Tasks.Task DeleteUserAsync(int userId);
         Task<User> GetUserByRoleUserIdAsync(string roleUserId);
         Task<User> AuthenticateUserAsync(string roleUserId, string password);
-        
+        Task<IEnumerable<User>> GetUsersByRoleAsync(string role);
+        Task<IEnumerable<User>> GetUsersByAvailabilityAsync(bool isActive);
+        Task<IEnumerable<User>> GetUsersByRoleAndAvailabilityAsync(string role, bool isActive);
+
 
     }
 }

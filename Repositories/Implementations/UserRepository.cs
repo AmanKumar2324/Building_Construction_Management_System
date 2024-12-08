@@ -83,5 +83,26 @@ namespace Building_Construction_Management_System.Repositories.Implementations
                 .FirstOrDefaultAsync(u => u.RoleUserId == roleUserId && u.PasswordHash == password);
         }
 
+        public async Task<IEnumerable<User>> GetUsersByRoleAsync(string role)
+        {
+            return await _context.Users
+                .Where(u => u.Role == role)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetUsersByAvailabilityAsync(bool isActive)
+        {
+            return await _context.Users
+                .Where(u => u.IsActive == isActive)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetUsersByRoleAndAvailabilityAsync(string role, bool isActive)
+        {
+            return await _context.Users
+                .Where(u => u.Role == role && u.IsActive == isActive)
+                .ToListAsync();
+        }
+
     }
 }
